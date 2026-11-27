@@ -6,19 +6,26 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 - View all available extracurricular activities
 - Sign up for activities
+- Unregister from activities
+
+Signup requires a valid email address and an available place. Invalid email
+addresses and full activities return HTTP 400. Email addresses are stored as
+provided; unregistering does not validate their format.
 
 ## Getting Started
+
+From the repository root:
 
 1. Install the dependencies:
 
    ```
-   pip install fastapi uvicorn
+   pip install -r requirements.txt
    ```
 
 2. Run the application:
 
    ```
-   python app.py
+   uvicorn src.app:app --reload
    ```
 
 3. Open your browser and go to:
@@ -31,6 +38,16 @@ A super simple FastAPI application that allows students to view and sign up for 
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| DELETE | `/activities/{activity_name}/signup?email=student@mergington.edu` | Unregister from an activity                                         |
+
+## Tests
+
+From the repository root, install the test dependencies and run the API tests:
+
+```
+pip install -r requirements-test.txt
+python -m pytest src/tests
+```
 
 ## Data Model
 

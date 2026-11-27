@@ -9,6 +9,48 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
+import re
+
+try:
+    from email_validator import EmailNotValidError, validate_email
+except ImportError:
+    class EmailNotValidError(ValueError):
+        pass
+
+    def validate_email(email: str, check_deliverability: bool = True):
+        if not isinstance(email, str) or len(email) > 254:
+            raise EmailNotValidError("Invalid email address")
+
+        if email.count("@") != 1:
+            raise EmailNotValidError("Invalid email address")
+
+        local, domain = email.rsplit("@", 1)
+        if (
+            not local
+            or len(local) > 64
+            or local.startswith(".")
+            or local.endswith(".")
+            or ".." in local
+        ):
+            raise EmailNotValidError("Invalid email address")
+
+        if not re.fullmatch(r"[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+", local):
+            raise EmailNotValidError("Invalid email address")
+
+        labels = domain.split(".")
+        if (
+            not domain
+            or len(domain) > 253
+            or any(
+                not label
+                or len(label) > 63
+                or not re.fullmatch(r"[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?", label)
+                for label in labels
+            )
+        ):
+            raise EmailNotValidError("Invalid email address")
+
+        return email
 from pathlib import Path
 
 app = FastAPI(title="Mergington High School API",
@@ -97,6 +139,14 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    try:
+        validate_email(email, check_deliverability=False)
+    except EmailNotValidError:
+        raise HTTPException(status_code=400, detail="Invalid email address")
+
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(status_code=400, detail="Activity is full")
 
     # Validate student already signed up
     if email in activity["participants"]:
