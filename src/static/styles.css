@@ -74,6 +74,78 @@ section h3 {
   margin-bottom: 8px;
 }
 
+.participants-section {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.participants-section h5 {
+  margin-bottom: 7px;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.participants-list {
+  padding: 0;
+  list-style: none;
+  color: #334155;
+}
+
+.participants-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 3px 0;
+}
+
+.participant-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.participants-list .participant-remove {
+  display: inline-grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  place-items: center;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #64748b;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.participants-list .participant-remove svg {
+  width: 17px;
+  height: 17px;
+}
+
+.participants-list .participant-remove:hover,
+.participants-list .participant-remove:focus-visible {
+  background: #fee2e2;
+  color: #b42318;
+}
+
+.participants-list .participant-remove:focus-visible {
+  outline: 2px solid #b42318;
+  outline-offset: 2px;
+}
+
+.participants-list .participant-remove:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.activity-card .participants-empty {
+  margin-bottom: 0;
+  color: #64748b;
+  font-style: italic;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
@@ -134,6 +206,85 @@ button:hover {
 
 .hidden {
   display: none;
+}
+
+#unregister-dialog {
+  width: min(440px, calc(100% - 32px));
+  margin: auto;
+  padding: 0;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  color: #1f2937;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.25);
+}
+
+#unregister-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(2px);
+}
+
+.unregister-dialog-content {
+  padding: 26px;
+}
+
+.unregister-eyebrow {
+  margin-bottom: 6px;
+  color: #b42318;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.unregister-dialog-content h2 {
+  margin-bottom: 10px;
+  color: #1f2937;
+  font-size: 1.25rem;
+}
+
+#unregister-details {
+  color: #475569;
+  overflow-wrap: anywhere;
+}
+
+.unregister-error {
+  margin-top: 12px;
+  color: #b42318;
+}
+
+.unregister-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.unregister-actions .unregister-cancel {
+  background: #eef2f6;
+  color: #334155;
+}
+
+.unregister-actions .unregister-cancel:hover {
+  background: #e2e8f0;
+}
+
+.unregister-actions .unregister-confirm {
+  background: #b42318;
+}
+
+.unregister-actions .unregister-confirm:hover {
+  background: #912018;
+}
+
+.unregister-actions button:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .unregister-actions button {
+    flex: 1 1 100%;
+  }
 }
 
 footer {

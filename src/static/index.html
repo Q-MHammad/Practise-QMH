@@ -41,6 +41,19 @@
       </section>
     </main>
 
+    <dialog id="unregister-dialog" aria-labelledby="unregister-title" aria-describedby="unregister-details">
+      <div class="unregister-dialog-content">
+        <p class="unregister-eyebrow">Confirm removal</p>
+        <h2 id="unregister-title">Unregister participant?</h2>
+        <p id="unregister-details"></p>
+        <p id="unregister-error" class="unregister-error" role="alert" hidden></p>
+        <div class="unregister-actions">
+          <button type="button" id="cancel-unregister" class="unregister-cancel">Keep participant</button>
+          <button type="button" id="confirm-unregister" class="unregister-confirm">Unregister</button>
+        </div>
+      </div>
+    </dialog>
+
     <footer>
       <p>&copy; 2023 Mergington High School</p>
     </footer>
