@@ -3,3 +3,4 @@ email-validator
 uvicorn
 httpx
 watchfiles
+pytest
